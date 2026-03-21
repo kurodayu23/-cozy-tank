@@ -1,87 +1,57 @@
-<div align="center">
+# 🎮 Cozy Tank - 坦克大战
 
-# 🎮 Cozy Tank
+基于 **Python + pywebview + React** 的混合架构坦克大战游戏。
 
-一个用 Python + React 混合架构实现的手账风坦克大战
+## 🚀 一键启动
 
-[![CI](https://github.com/kurodayu23/-cozy-tank/actions/workflows/ci.yml/badge.svg)](https://github.com/kurodayu23/-cozy-tank/actions)
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![WebView2](https://img.shields.io/badge/WebView2-Edge%20Chromium-0078D4?logo=microsoftedge&logoColor=white)
+**双击** `启动游戏.bat` 即可运行。
 
-</div>
-
----
-
-## 关于这个项目
-
-经典坦克大战的现代复刻，但不是传统的黑底像素风——
-我把整个画面改成了粉色手账本的风格，坦克变成了圆圆的小动物脸，子弹是飞出去的小红心 ❤️
-
-底层架构比较特别：Python 负责窗口管理和数据持久化，
-游戏引擎和 UI 全部跑在内嵌的 Edge WebView2 里面，前端用 React 19 写的。
-音效没有用任何音频文件，全部是 Web Audio API 实时合成的波形。
-
-## 主要特性
-
-- 🐾 可爱的动物风坦克 + 弹跳待机动画
-- 🌸 过关时的毛玻璃弹窗 + 满屏礼花粒子特效
-- 🎵 Web Audio API 实时合成音效（三角波/方波），零资源依赖
-- 🧱 多种地形：砖墙、钢墙、水面（动态）、草丛（伪装）
-- 💥 爆炸粒子系统 + 屏幕震动 + 坦克履带痕迹
-- ⭐ 道具系统：加速射击、冻结、护盾、空袭、加固
-- 💾 本地最高分存储（Python JSON 桥接）
-- 🎯 两关制战役，难度递进
-
-## 跑起来
-
+或手动启动：
 ```bash
-git clone https://github.com/kurodayu23/-cozy-tank.git
-cd cozy-tank
-
-pip install -r requirements.txt   # 只需要 pywebview
-
+pip install pywebview>=4.0
 python tank_game.py
 ```
 
-> 需要 Python 3.10+ 和 Windows（WebView2 运行时，Win10/11 自带）
-
-## 操作方式
+## 🎯 游戏操作
 
 | 按键 | 功能 |
 |------|------|
-| `W A S D` / `方向键` | 移动 |
-| `空格` / `回车` | 开火 |
-| `P` | 暂停 |
-| `ESC` | 全屏切换 |
+| `↑ ↓ ← →` | 移动坦克 |
+| `空格` / `Enter` | 发射子弹 |
+| `ESC` | 暂停 / 菜单 |
 
-## 技术架构
+## 🔊 音效系统
 
-```
-Python 后端（pywebview）
-    ↕ JS ↔ Python RPC 桥接
-React 19 前端（Canvas 2D 引擎 + Web Audio + Tailwind）
-```
+使用 Web Audio API 实时合成，无需外部音频文件：
+- 射击音效 (正弦波下滑)
+- 命中音效 (三角波)
+- 爆炸音效 (滤波噪声)
+- UI 悬停音效 (马林巴)
+- 游戏结束 / 胜利旋律
 
-- **窗口宿主**: pywebview + Edge WebView2
-- **游戏引擎**: Canvas 2D，AABB 碰撞检测
-- **UI 框架**: React 19 + Tailwind CSS
-- **音频**: Web Audio API 振荡器合成
-- **字体加载**: `rel="preload"` 异步方案，0ms 首屏
-
-## 项目结构
+## 📁 项目结构
 
 ```
-cozy-tank/
-├── .github/workflows/ci.yml   # CI 验证
-├── frontend/                   # 前端编译产物
-│   ├── index.html
+├── tank_game.py           # Python 启动器 (pywebview)
+├── 启动游戏.bat           # 一键启动脚本
+├── requirements.txt       # Python 依赖
+├── frontend/
+│   ├── index.html         # 主页面 + 主题 CSS
+│   ├── game-inject.js     # 音效 + 暂停弹窗 + HUD
 │   └── assets/
-├── tank_game.py                # 入口
-├── requirements.txt
-└── .gitignore
+│       ├── index-*.js     # React 游戏引擎 (打包)
+│       └── index-*.css    # Tailwind 样式 (打包)
+└── README.md
 ```
 
-## License
+## 🛠 技术栈
 
-MIT
+- **后端**: Python 3 + pywebview (WebView2/Edge Chromium)
+- **前端**: React 19 + Canvas 2D + Web Audio API
+- **主题**: 粉色可爱风 (ZCOOL KuaiLe + LXGW WenKai 字体)
+
+## 📋 环境要求
+
+- Windows 10+ (需要 Edge WebView2 运行时)
+- Python 3.8+
+- pywebview >= 4.0

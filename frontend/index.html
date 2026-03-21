@@ -29,6 +29,94 @@
       body {
         background-color: #fdf6f5 !important;
       }
+      .yyc-bg-pink { background-color: #f7ece1 !important; }
+      .yyc-bg-cream { background-color: #fffdf0 !important; }
+      .yyc-bg-hover { background-color: #fff0f5 !important; }
+      .yyc-bg-rose { background-color: #ffb6c1 !important; }
+      .yyc-bg-brown { background-color: #5c4033 !important; }
+      .yyc-text-brown { color: #5c4033 !important; }
+      .yyc-text-rose { color: #b56576 !important; }
+      .z-50.yyc-bg-pink, .z-50.yyc-bg-pink * {
+        font-family: 'LXGW WenKai Lite', '幼圆', 'Microsoft YaHei', sans-serif !important;
+        letter-spacing: 0.05em;
+      }
+      .yyc-font { font-family: 'LXGW WenKai Lite', '幼圆', sans-serif !important; }
+      .yyc-shadow-hover:hover { box-shadow: 0 4px 20px 0 rgba(181,101,118,0.4) !important; }
+      .yyc-rounded { border-radius: 12px !important; }
+      .yyc-title-stroke {
+        color: #5c4033 !important;
+        text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 4px 4px 5px rgba(0,0,0,0.1) !important;
+      }
+      @keyframes yycFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .yyc-float-anim {
+        animation: yycFloat 3.5s ease-in-out infinite;
+        transform-style: preserve-3d;
+      }
+      .yyc-text-dark { color: #666666 !important; }
+      .yyc-pad-left { padding-left: 15vw !important; }
+      @media (max-width: 768px) { .yyc-pad-left { padding-left: 5vw !important; } }
+      .yyc-margin-left { margin-left: 30% !important; }
+      .yyc-tracking-mega { letter-spacing: 0.2em !important; }
+      .yyc-mega-bg { background-color: rgba(255, 182, 193, 0.4) !important; }
+      .yyc-mega-title { font-size: 160px !important; line-height: 1 !important; margin-top: 1rem !important; margin-bottom: 2rem !important; }
+      @media (max-width: 768px) { .yyc-mega-title { font-size: 90px !important; } }
+      .yyc-sub-title { font-size: 100px !important; line-height: 1 !important; margin-top: -3rem !important; }
+      @media (max-width: 768px) { .yyc-sub-title { font-size: 60px !important; } }
+      .esc-overlay {
+        display: none;
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(253, 246, 245, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 999999;
+        flex-direction: column; align-items: center; justify-content: center;
+        font-family: 'ZCOOL KuaiLe', '幼圆', sans-serif;
+      }
+      .esc-box {
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 182, 193, 0.4);
+        border-radius: 20px;
+        padding: 40px 60px;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
+        display: flex; flex-direction: column; gap: 20px;
+      }
+      .esc-title {
+        font-size: 32px; font-weight: normal; letter-spacing: 4px;
+        margin-bottom: 20px; color: #ff8da1;
+      }
+      .esc-btn {
+        background: #fff;
+        border: 1px solid #ffb6c1;
+        border-radius: 12px;
+        color: #ff69b4;
+        font-size: 18px; letter-spacing: 2px;
+        padding: 12px 30px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 10px rgba(255, 182, 193, 0.1);
+      }
+      .esc-btn:hover {
+        background: #fff0f5;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(255, 182, 193, 0.25);
+      }
+      .esc-btn.danger { color: #ff8da1; border-color: #ffd1dc; }
+      .esc-btn.danger:hover { background: #ffe4e1; }
+      .custom-overlay {
+        display: none;
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        z-index: 9999999;
+        flex-direction: column; align-items: center; justify-content: center;
+        transition: all 0.5s ease;
+        font-family: 'ZCOOL KuaiLe', '幼圆', sans-serif;
+      }
+      .game-failed canvas { filter: grayscale(80%) sepia(20%) hue-rotate(-50deg) saturate(150%) brightness(70%); transition: filter 2s; }
+      .game-won canvas { filter: contrast(120%) brightness(110%) hue-rotate(-10deg); transition: filter 2s; }
     </style>
     
     <div id="root">
@@ -42,5 +130,6 @@
       </div>    
     </div>
 
+    <script defer src="./game-inject.js"></script>
   </body>
 </html>
