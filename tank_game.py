@@ -1,5 +1,8 @@
 
-import sys, os, json
+import sys
+import os
+import json
+from pathlib import Path
 import webview
 
 DIR        = os.path.dirname(os.path.abspath(__file__))
@@ -8,38 +11,37 @@ SCORE_FILE = os.path.join(DIR, 'highscore.json')
 
 win_instance = None
 class Api:
+    """暴露给 JavaScript 的 Python 接口。"""
+
     def toggle_fullscreen(self):
         if win_instance:
             win_instance.toggle_fullscreen()
 
-    """暴露给 JavaScript 的 Python 接口"""
-
     def get_high_score(self):
         try:
             with open(SCORE_FILE, 'r', encoding='utf-8') as f:
-                return json.load(f).get('high', 0)
-        except Exception:
+                score = json.load(f).get('high', 0)
+                return max(0, int(score))
+        except (OSError, ValueError, TypeError, AttributeError):
             return 0
 
     def save_high_score(self, score):
-        try:
-            with open(SCORE_FILE, 'w', encoding='utf-8') as f:
-                json.dump({'high': int(score)}, f)
-        except Exception:
-            pass
+        score = max(self.get_high_score(), max(0, int(score)))
+        with open(SCORE_FILE, 'w', encoding='utf-8') as f:
+            json.dump({'high': score}, f)
 
     def quit(self):
         """从 JS 端关闭窗口"""
-        import threading
-        threading.Thread(target=win.destroy, daemon=True).start()
+        if win_instance:
+            win_instance.destroy()
 
 if __name__ == '__main__':
     if not os.path.exists(GAME_HTML):
-        print(f"[错误] 找不到 game.html，请确保它在同目录下:\n  {GAME_HTML}")
+        print(f"[错误] 找不到 frontend/index.html，请保持仓库目录完整:\n  {GAME_HTML}")
         sys.exit(1)
 
-    url = 'file:///' + GAME_HTML.replace('\\', '/')
-    win_instance = win = webview.create_window(
+    url = Path(GAME_HTML).as_uri()
+    win_instance = webview.create_window(
         title='Cozy Tank - Hybrid Python/React Retro Game',
         url=url,
         js_api=Api(),

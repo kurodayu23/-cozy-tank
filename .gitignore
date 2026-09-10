@@ -26,3 +26,5 @@ desktop.ini
 
 # Agents
 .agents/
+
+.pytest_cache/
