@@ -8,7 +8,7 @@
 
 或手动启动：
 ```bash
-pip install pywebview>=4.0
+python -m pip install -r requirements.txt
 python tank_game.py
 ```
 
@@ -55,3 +55,15 @@ python tank_game.py
 - Windows 10+ (需要 Edge WebView2 运行时)
 - Python 3.8+
 - pywebview >= 4.0
+
+## 开发与验证边界
+
+当前仓库包含 Python 启动器、手写交互脚本和已经打包的前端资源，尚未包含可重新构建 React 游戏的完整源码与构建配置。因此目前适合运行和维护启动器、交互脚本，不应视为完整的 React 工程模板。
+
+```bash
+python -m pip install -r requirements.txt pytest
+python -m pytest -q
+node --check frontend/game-inject.js
+```
+
+测试覆盖高分保存、损坏数据读取、窗口接口和本地资源完整性。CI 不启动桌面窗口，不能替代 WebView2 窗口、键盘操作和游戏流程的实际验收。界面字体引用外部资源，离线时可能使用系统回退字体。

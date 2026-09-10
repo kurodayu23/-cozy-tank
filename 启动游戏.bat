@@ -1,6 +1,7 @@
 @echo off
 chcp 65001 >nul
 title Cozy Tank - 启动中...
+cd /d "%~dp0"
 
 echo.
 echo   ╔══════════════════════════════════╗
@@ -19,12 +20,12 @@ if errorlevel 1 (
 
 :: Check and install dependencies
 echo [1/2] 检查依赖...
-pip show pywebview >nul 2>&1
+python -m pip show pywebview >nul 2>&1
 if errorlevel 1 (
     echo [1/2] 正在安装 pywebview...
-    pip install pywebview>=4.0
+    python -m pip install -r "%~dp0requirements.txt"
     if errorlevel 1 (
-        echo [错误] 安装 pywebview 失败，请手动运行: pip install pywebview
+        echo [错误] 安装 pywebview 失败，请手动运行: python -m pip install -r requirements.txt
         pause
         exit /b 1
     )
