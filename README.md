@@ -1,5 +1,7 @@
 # 🎮 Cozy Tank - 坦克大战
 
+**[下载 Windows x64 运行包](https://github.com/kurodayu23/-cozy-tank/releases/latest)**：下载 `CozyTank-v1.0.0-Windows-x64.zip`，完整解压后双击 `CozyTank.exe`，无需安装 Python。需要 Windows 10/11 和 WebView2 Runtime。
+
 基于 **Python + pywebview + React** 的混合架构坦克大战游戏。
 
 ## Vibe Coding / AI 辅助开发
@@ -75,3 +77,14 @@ node --check frontend/game-inject.js
 ```
 
 测试覆盖高分保存、损坏数据读取、窗口接口和本地资源完整性。CI 不启动桌面窗口，不能替代 WebView2 窗口、键盘操作和游戏流程的实际验收。界面字体引用外部资源，离线时可能使用系统回退字体。
+
+## 构建 Windows 下载包
+
+使用 Python 3.11 x64，建议在独立虚拟环境中运行：
+
+```powershell
+python -m pip install -r scripts/build-requirements.txt
+.\scripts\package_windows.ps1
+```
+
+输出在 `dist/`。脚本会包含运行时和所需资源，生成包含 EXE 与 `_internal` 的 ZIP；发布前需验证解压后的程序。
